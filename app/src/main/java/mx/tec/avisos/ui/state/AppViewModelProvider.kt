@@ -14,15 +14,16 @@ import mx.tec.avisos.AvisosApplication
 object AppViewModelProvider {
 
     val Factory = viewModelFactory {
+        initializer { SesionViewModel(avisosApplication().container.sesionRepository) }
 
-        initializer { LoginViewModel() }
+        initializer { LoginViewModel(avisosApplication().container.sesionRepository) }
 
         initializer { AvisosViewModel(avisosApplication().container.avisosRepository) }
 
-        initializer { PublicarViewModel(avisosApplication().container.avisosRepository) }
-    }
+        initializer { PublicarViewModel(avisosApplication().container.avisosRepository)
+        }
 }
 
 /** El atajo para llegar al contenedor desde dentro de un initializer. */
 private fun CreationExtras.avisosApplication(): AvisosApplication =
-    this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as AvisosApplication
+    this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as AvisosApplication }
